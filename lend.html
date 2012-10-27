@@ -17,6 +17,12 @@
       .sidebar-nav {
         padding: 9px 0;
       }
+      .form-horizontal .control-label{
+        width: 60px;
+      }
+      .form-horizontal .controls {
+        margin-left: 80px;
+      }
     </style>
     <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 
@@ -40,10 +46,69 @@
     <div class="container">
 
       <h1>Lend !</h1>
-      <p>
-        ...
-      </p>
- 
+      
+      <div class="row">
+        <div class="span4"> 
+          <div class="well">
+            <form class="form-horizontal">
+              <legend>Enregistrer un pret</legend>
+                <div class="control-group">
+                  <label class="control-label" for="inputQuoi">Quoi</label>
+                  <div class="controls">
+                    <input type="text" id="inputQuoi" placeholder="Quoi">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="inputAQui">A qui</label>
+                  <div class="controls">
+                    <input type="text" id="inputAQui" placeholder="A qui">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="inputQuand">Quand</label>
+                  <div class="controls">
+                    <input type="text" id="inputQuand" placeholder="Quand" />
+                  </div>
+                </div>
+                 <br />
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+        <div class="span8">
+          <table class="table table-hover table-condensed">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Quoi</th>
+                <th>A qui</th>
+                <th>Quand</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>DVD south park saison 1</td>
+                <td>Boby</td>
+                <td>15/07/2012</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>CD bob marley</td>
+                <td>Alby</td>
+                <td>20/09/2012</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>15 euros</td>
+                <td>Albator</td>
+                <td>01/09/2012</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
       <div id="footer"></div>
       
     </div> <!-- /container -->
