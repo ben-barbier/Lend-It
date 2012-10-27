@@ -50,28 +50,32 @@
       <div class="row">
         <div class="span4"> 
           <div class="well">
-            <form class="form-horizontal">
-              <legend>Enregistrer un pret</legend>
+            <form class="form-horizontal" action="#">
+              <legend>Record a lend</legend>
+              <div id="addLendSuccess" class="alert alert-success" style="display:none;">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                Lend successfully saved.
+              </div>
                 <div class="control-group">
-                  <label class="control-label" for="inputQuoi">Quoi</label>
+                  <label class="control-label" for="inputWhat">What :</label>
                   <div class="controls">
-                    <input type="text" id="inputQuoi" placeholder="Quoi">
+                    <input type="text" id="inputWhat" placeholder="What have you lent ?">
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label" for="inputAQui">A qui</label>
+                  <label class="control-label" for="inputWho">Who :</label>
                   <div class="controls">
-                    <input type="text" id="inputAQui" placeholder="A qui">
+                    <input type="text" id="inputWho" placeholder="To whom you have lent ?">
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label" for="inputQuand">Quand</label>
+                  <label class="control-label" for="inputWhen">When :</label>
                   <div class="controls">
-                    <input type="text" id="inputQuand" placeholder="Quand" />
+                    <input type="text" id="inputWhen" placeholder="When you have lent ?" />
                   </div>
                 </div>
                  <br />
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="addLendButton" class="btn btn-primary">Submit</button>
             </form>
           </div>
         </div>
@@ -80,9 +84,9 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>Quoi</th>
-                <th>A qui</th>
-                <th>Quand</th>
+                <th>What</th>
+                <th>Who</th>
+                <th>When</th>
               </tr>
             </thead>
             <tbody>
@@ -122,7 +126,11 @@
     $(document).ready(function(){
 		$('#header').load('header.inc.html');
 		$('#footer').load('footer.inc.html');
-	});
+	    $('#addLendButton').click(function(){
+	    	$('#addLendSuccess').fadeIn();
+	    });
+    });
+    
     </script>
   </body>
 </html>
