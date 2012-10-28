@@ -112,11 +112,11 @@
 	    	$('#addLendSuccess').fadeIn();
 	    });
 	    
-// 	    var result = $.getJSON("http://localhost:8080/services/lendList");
-	    var result = {"lendList":[{"who":"Boby","lendID":1,"object":"DVD south park saison 1","when":"15/07/2012"},{"who":"Alby","lendID":2,"object":"CD bob marley","when":"20/09/2012"},{"who":"Albator","lendID":3,"object":"15 euros","when":"01/09/2012"},{"who":"Bob Dylan","lendID":4,"object":"Vélo","when":"04/04/2004"}]};
 		var template = "{{#lendList}}<tr><td>{{lendID}}</td><td>{{object}}</td><td>{{who}}</td><td>{{when}}</td></tr>{{/lendList}}";
-    	var html = Mustache.to_html(template, result);
-    	$('#lendList').html(html);
+	    var result = $.getJSON("json/demo.json", function(data){
+    		var html = Mustache.to_html(template, data);
+	    	$('#lendList').html(html);
+	    });
 	    
     });
     
