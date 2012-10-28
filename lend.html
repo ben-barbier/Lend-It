@@ -89,26 +89,7 @@
                 <th>When</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>DVD south park saison 1</td>
-                <td>Boby</td>
-                <td>15/07/2012</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>CD bob marley</td>
-                <td>Alby</td>
-                <td>20/09/2012</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>15 euros</td>
-                <td>Albator</td>
-                <td>01/09/2012</td>
-              </tr>
-            </tbody>
+            <tbody id="lendList"></tbody>
           </table>
         </div>
       </div>
@@ -122,6 +103,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="bootstrap/js/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="javascript/mustache.js"></script>
 	<script>
     $(document).ready(function(){
 		$('#header').load('header.inc.html');
@@ -129,6 +111,13 @@
 	    $('#addLendButton').click(function(){
 	    	$('#addLendSuccess').fadeIn();
 	    });
+	    
+// 	    var result = $.getJSON("http://localhost:8080/services/lendList");
+	    var result = {"lendList":[{"who":"Boby","lendID":1,"object":"DVD south park saison 1","when":"15/07/2012"},{"who":"Alby","lendID":2,"object":"CD bob marley","when":"20/09/2012"},{"who":"Albator","lendID":3,"object":"15 euros","when":"01/09/2012"},{"who":"Bob Dylan","lendID":4,"object":"Vélo","when":"04/04/2004"}]};
+		var template = "{{#lendList}}<tr><td>{{lendID}}</td><td>{{object}}</td><td>{{who}}</td><td>{{when}}</td></tr>{{/lendList}}";
+    	var html = Mustache.to_html(template, result);
+    	$('#lendList').html(html);
+	    
     });
     
     </script>
