@@ -112,7 +112,7 @@
                   <td>{{who}}</td>
                   <td>{{when}}</td>
                   <td><i class="editLendIcon icon-pencil"></i></td>
-                  <td><i class="deleteLendIcon icon-trash"></i></td>
+                  <td><i class="icon-trash" id="deleteLendIcon-{{lendID}}"></i></td>
                 </tr>
               {{/lendList}}
               </script>
@@ -162,19 +162,29 @@
     <!-- /Modal Edit -->
     
     <!-- Modal Delete -->
-    <div id="deleteLendModal" class="modal hide fade">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>Delete a lend</h3>
+    <script id="deleteLendModalList" type="text/template">
+    {{#lendList}}
+      <div id="deleteLendModal-{{lendID}}" class="modal hide fade">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3>Delete a lend</h3>
+        </div>
+        <div class="modal-body">
+          <p>
+             Are you sure to delete this lend ?<br /><br />
+             ID : {{lendID}}<br />
+             Object : {{object}}<br />
+             Who : {{who}}<br />
+             When : {{when}}
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-danger" id="deleteLendButton-{{lendID}}">Delete</button>
+        </div>
       </div>
-      <div class="modal-body">
-        <p> Are you sure to delete this lend ?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-danger" id="deleteLendButton">Delete</button>
-      </div>
-    </div>
+    {{/lendList}}
+    </script>
     <!-- /Modal Delete -->
     
     <!-- Le javascript
@@ -198,24 +208,29 @@
         });
         $('#editLendButton').click(function(){
             $('#editLendSuccess').fadeIn();
-        });
-        $('#deleteLendButton').click(function(){
-            $('#deleteLendSuccess').fadeIn();
-        });
-        $('#deleteLendButton').click(function(){
-            $('#deleteLendModal').modal('hide');
-        });
-        $('#editLendButton').click(function(){
             $('#editLendModal').modal('hide');
         });
         $.getJSON(server + "/services/lendList/get?callback=?", function (json) {
+        	// Fill templates
             $('#LendListTable').replaceWith(Mustache.to_html($('#LendListTable').html(), json));
+            $('#deleteLendModalList').replaceWith(Mustache.to_html($('#deleteLendModalList').html(), json));
+            
+            // Edit actions
             $('.editLendIcon').click(function(){
               $('#editLendModal').modal();
             });
-            $('.deleteLendIcon').click(function(){
-              $('#deleteLendModal').modal();
+            
+            // Delete actions
+            $('[id^=deleteLendIcon-]').click(function(){
+              var lendID = this.id.substr(this.id.length-1);
+              $('#deleteLendModal-'+lendID).modal();
             });
+	        $('[id^=deleteLendButton-]').click(function(){
+	            var lendID = this.id.substr(this.id.length-1);
+	            $('#deleteLendModal-'+lendID).modal('hide');
+	            // Delete action...
+	            $('#deleteLendSuccess').fadeIn();
+	        });
         });
         
     });
