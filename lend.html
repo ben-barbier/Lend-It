@@ -106,6 +106,12 @@
     <script src="javascript/mustache.js"></script>
 	<script>
     $(document).ready(function(){
+    	
+    	/*-------------------*/
+//     	var server = 'http://localhost:8080';
+    	var server = 'http://lend-it-back.herokuapp.com';
+    	/*-------------------*/
+    	
 		$('#header').load('header.inc.html');
 		$('#footer').load('footer.inc.html');
 	    $('#addLendButton').click(function(){
@@ -113,8 +119,8 @@
 	    });
 	    
 		var template = "{{#lendList}}<tr><td>{{lendID}}</td><td>{{object}}</td><td>{{who}}</td><td>{{when}}</td></tr>{{/lendList}}";
-	    var result = $.getJSON("json/demo.json", function(data){
-    		var html = Mustache.to_html(template, data);
+		var result = $.getJSON(server + "/services/lendList/get?callback=?", function(data){
+			var html = Mustache.to_html(template, data);
 	    	$('#lendList').html(html);
 	    });
 	    
