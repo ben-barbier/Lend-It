@@ -8,7 +8,7 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -24,8 +24,8 @@
         margin-left: 80px;
       }
     </style>
-    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="datepicker/css/datepicker.css" rel="stylesheet"> 
+    <link href="lib/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="lib/datepicker/css/datepicker.css" rel="stylesheet"> 
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -34,10 +34,10 @@
 
     <!-- Le fav and touch icons -->
 <!--     <link rel="shortcut icon" href="bootstrap/ico/favicon.ico"> -->
-<!--     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="bootstrap/ico/apple-touch-icon-144-precomposed.png"> -->
-<!--     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="bootstrap/ico/apple-touch-icon-114-precomposed.png"> -->
-<!--     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="bootstrap/ico/apple-touch-icon-72-precomposed.png"> -->
-<!--     <link rel="apple-touch-icon-precomposed" href="bootstrap/ico/apple-touch-icon-57-precomposed.png"> -->
+<!--     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="lib/bootstrap/ico/apple-touch-icon-144-precomposed.png"> -->
+<!--     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="lib/bootstrap/ico/apple-touch-icon-114-precomposed.png"> -->
+<!--     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="lib/bootstrap/ico/apple-touch-icon-72-precomposed.png"> -->
+<!--     <link rel="apple-touch-icon-precomposed" href="lib/bootstrap/ico/apple-touch-icon-57-precomposed.png"> -->
   </head>
 
   <body>
@@ -111,12 +111,12 @@
               <script id="LendListTable" type="text/template">
               {{#lendList}}
                 <tr>
-                  <td>{{lendID}}</td>
+                  <td>{{lendId}}</td>
                   <td>{{object}}</td>
                   <td>{{who}}</td>
                   <td>{{when}}</td>
-                  <td><i class="icon-pencil" id="editLendIcon-{{lendID}}"></i></td>
-                  <td><i class="icon-trash" id="deleteLendIcon-{{lendID}}"></i></td>
+                  <td><i class="icon-pencil" id="editLendIcon-{{lendId}}"></i></td>
+                  <td><i class="icon-trash" id="deleteLendIcon-{{lendId}}"></i></td>
                 </tr>
               {{/lendList}}
               </script>
@@ -132,7 +132,7 @@
     <!-- Modal Edit -->
     <script id="editLendModalList" type="text/template">
     {{#lendList}}
-    <div id="editLendModal-{{lendID}}" class="modal hide fade">
+    <div id="editLendModal-{{lendId}}" class="modal hide fade">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3>Edit a lend</h3>
@@ -142,7 +142,7 @@
           <div class="control-group">
             <label class="control-label" for="inputLendID">ID :</label>
             <div class="controls">
-              <input type="text" id="inputWhat" value="{{lendID}}" disabled />
+              <input type="text" id="inputWhat" value="{{lendId}}" disabled />
             </div>
           </div>
           <div class="control-group">
@@ -171,7 +171,7 @@
       </div>
       <div class="modal-footer">
         <button id="cancelEditLendButton" type="button" class="btn" data-dismiss="modal">Close</button>
-        <button type="submit" id="editLendButton-{{lendID}}" class="btn btn-primary">Save</button>
+        <button type="submit" id="editLendButton-{{lendId}}" class="btn btn-primary">Save</button>
       </div>
     </div>
     {{/lendList}}
@@ -181,7 +181,7 @@
     <!-- Modal Delete -->
     <script id="deleteLendModalList" type="text/template">
     {{#lendList}}
-      <div id="deleteLendModal-{{lendID}}" class="modal hide fade">
+      <div id="deleteLendModal-{{lendId}}" class="modal hide fade">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h3>Delete a lend</h3>
@@ -189,7 +189,7 @@
         <div class="modal-body">
           <p>
              Are you sure to delete this lend ?<br /><br />
-             ID : {{lendID}}<br />
+             ID : {{lendId}}<br />
              Object : {{object}}<br />
              Who : {{who}}<br />
              When : {{when}}
@@ -197,7 +197,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-danger" id="deleteLendButton-{{lendID}}">Delete</button>
+          <button type="submit" class="btn btn-danger" id="deleteLendButton-{{lendId}}">Delete</button>
         </div>
       </div>
     {{/lendList}}
@@ -207,10 +207,10 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="bootstrap/js/jquery.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="bootstrap/datepicker/js/bootstrap-datepicker.js"></script>
-    <script src="javascript/mustache.js"></script>
+    <script src="lib/bootstrap/js/jquery.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="lib/bootstrap/datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="lib/mustache.js"></script>
     <script>
     $(document).ready(function(){
         
@@ -230,7 +230,7 @@
             $('#editLendSuccess').fadeIn();
             $('#editLendModal').modal('hide');
         });
-        $.getJSON(server + "/services/lendList/get?callback=?", function (json) {
+        $.getJSON(server + "/services/lends/list?callback=?", function (json) {
         	// Fill templates
             $('#LendListTable').replaceWith(Mustache.to_html($('#LendListTable').html(), json));
             $('#deleteLendModalList').replaceWith(Mustache.to_html($('#deleteLendModalList').html(), json));
@@ -241,24 +241,24 @@
             
             // Edit actions
             $('[id^=editLendIcon-]').click(function(){
-                var lendID = this.id.substr(this.id.length-1);
-                $('#editLendModal-'+lendID).modal();
+                var lendId = this.id.substr(this.id.length-1);
+                $('#editLendModal-'+lendId).modal();
               });
             $('[id^=editLendButton-]').click(function(){
-	            var lendID = this.id.substr(this.id.length-1);
-	            $('#editLendModal-'+lendID).modal('hide');
+	            var lendId = this.id.substr(this.id.length-1);
+	            $('#editLendModal-'+lendId).modal('hide');
 	            // Delete action...
 	            $('#editLendSuccess').fadeIn();
 	        });
             
             // Delete actions
             $('[id^=deleteLendIcon-]').click(function(){
-              var lendID = this.id.substr(this.id.length-1);
-              $('#deleteLendModal-'+lendID).modal();
+              var lendId = this.id.substr(this.id.length-1);
+              $('#deleteLendModal-'+lendId).modal();
             });
 	        $('[id^=deleteLendButton-]').click(function(){
-	            var lendID = this.id.substr(this.id.length-1);
-	            $('#deleteLendModal-'+lendID).modal('hide');
+	            var lendId = this.id.substr(this.id.length-1);
+	            $('#deleteLendModal-'+lendId).modal('hide');
 	            // Delete action...
 	            $('#deleteLendSuccess').fadeIn();
 	        });
