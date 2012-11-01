@@ -83,15 +83,15 @@
           
           <!-- Alerts -->
           <div id="addLendSuccess" class="alert alert-success hide">
-            <button type="button" class="close" data-dismiss="alert">×</button>
+            <button type="button" class="close">×</button>
             Lend successfully saved.
           </div>
           <div id="editLendSuccess" class="alert alert-success hide">
-            <button type="button" class="close" data-dismiss="alert">×</button>
+            <button type="button" class="close">×</button>
             Lend successfully updated.
           </div>
           <div id="deleteLendSuccess" class="alert alert-success hide">
-            <button type="button" class="close" data-dismiss="alert">×</button>
+            <button type="button" class="close">×</button>
             Lend successfully deleted.
           </div>
           <!-- /Alerts -->
@@ -215,9 +215,15 @@
     
     <script  type="text/javascript">
     $(document).ready(function(){
-        $('#header').load('header.inc.html');
-        $('#footer').load('footer.inc.html');
-        $('.datepicker').datepicker();
+      
+      //Hide the alert message
+      $('.alert .close').live('click',function(){
+        $(this).parent().fadeOut();
+      });
+      
+      $('#header').load('header.inc.html');
+      $('#footer').load('footer.inc.html');
+      $('.datepicker').datepicker();
     });
     </script>
   </body>
