@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app>
   <head>
     <meta charset="utf-8">
     <title>Lend-It</title>
@@ -96,7 +96,7 @@
           </div>
           <!-- /Alerts -->
           
-          <table class="table table-hover table-condensed">
+          <table ng-controller="lendCtrl" class="table table-hover table-condensed">
             <thead>
               <tr>
                 <th>#</th>
@@ -107,19 +107,15 @@
                 <th></th>
               </tr>
             </thead>
-            <tbody id="lendList"> 
-              <script id="LendListTable" type="text/template">
-              {{#lendList}}
-                <tr>
-                  <td>{{lendId}}</td>
-                  <td>{{object}}</td>
-                  <td>{{who}}</td>
-                  <td>{{when}}</td>
+            <tbody ng-repeat='lends in lendList' id="lendList"> 
+                <tr ng-repeat='lend in lends'>
+                  <td>{{lend.lendId}}</td>
+                  <td>{{lend.object}}</td>
+                  <td>{{lend.who}}</td>
+                  <td>{{lend.when}}</td>
                   <td><i class="icon-pencil" id="editLendIcon-{{lendId}}"></i></td>
                   <td><i class="icon-trash" id="deleteLendIcon-{{lendId}}"></i></td>
                 </tr>
-              {{/lendList}}
-              </script>
             </tbody>
           </table>
         </div>
@@ -130,78 +126,82 @@
     </div> <!-- /container -->
     
     <!-- Modal Edit -->
-    <script id="editLendModalList" type="text/template">
-    {{#lendList}}
-    <div id="editLendModal-{{lendId}}" class="modal hide fade">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>Edit a lend</h3>
-      </div>
-      <div class="modal-body">
-        <form class="form-horizontal" action="#">
-          <div class="control-group">
-            <label class="control-label" for="inputLendID">ID :</label>
-            <div class="controls">
-              <input type="text" id="inputWhat" value="{{lendId}}" disabled />
+    <div ng-controller="lendCtrl">
+      <div ng-repeat='lends in lendList'>
+        <div ng-repeat='lend in lends'>
+          <div id="editLendModal-{{lend.lendId}}" class="modal hide fade">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h3>Edit a lend</h3>
+            </div>
+            <div class="modal-body">
+              <form class="form-horizontal" action="#">
+                <div class="control-group">
+                  <label class="control-label" for="inputLendID">ID :</label>
+                  <div class="controls">
+                    <input type="text" id="inputWhat" value="{{lend.lendId}}" disabled />
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="inputWhat">What :</label>
+                  <div class="controls">
+                    <input type="text" id="inputWhat" placeholder="What have you lent ?" value="{{lend.object}}" />
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="inputWho">Who :</label>
+                  <div class="controls">
+                    <input type="text" id="inputWho" placeholder="To whom you have lent ?" value="{{lend.who}}" />
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="inputWhen">When :</label>
+                  <div class="controls">
+                    <div data-date-viewmode="years" data-date-format="dd/mm/yyyy" data-date="{{lend.when}}" id="inputWhen" class="datepicker input-append date">
+                      <input type="text" readonly="" value="{{lend.when}}" size="16" class="span2" />
+                      <span class="add-on"><i class="icon-calendar"></i></span>
+                    </div>
+                  </div>
+                </div>
+                <br />
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button id="cancelEditLendButton" type="button" class="btn" data-dismiss="modal">Close</button>
+              <button type="submit" id="editLendButton-{{lend.lendId}}" class="btn btn-primary">Save</button>
             </div>
           </div>
-          <div class="control-group">
-            <label class="control-label" for="inputWhat">What :</label>
-            <div class="controls">
-              <input type="text" id="inputWhat" placeholder="What have you lent ?" value="{{object}}" />
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="inputWho">Who :</label>
-            <div class="controls">
-              <input type="text" id="inputWho" placeholder="To whom you have lent ?" value="{{who}}" />
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="inputWhen">When :</label>
-            <div class="controls">
-              <div data-date-viewmode="years" data-date-format="dd/mm/yyyy" data-date="{{when}}" id="inputWhen" class="datepicker input-append date">
-                <input type="text" readonly="" value="{{when}}" size="16" class="span2" />
-                <span class="add-on"><i class="icon-calendar"></i></span>
-              </div>
-            </div>
-          </div>
-          <br />
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button id="cancelEditLendButton" type="button" class="btn" data-dismiss="modal">Close</button>
-        <button type="submit" id="editLendButton-{{lendId}}" class="btn btn-primary">Save</button>
+        </div>
       </div>
     </div>
-    {{/lendList}}
-    </script>
     <!-- /Modal Edit -->
     
     <!-- Modal Delete -->
-    <script id="deleteLendModalList" type="text/template">
-    {{#lendList}}
-      <div id="deleteLendModal-{{lendId}}" class="modal hide fade">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h3>Delete a lend</h3>
-        </div>
-        <div class="modal-body">
-          <p>
-             Are you sure to delete this lend ?<br /><br />
-             ID : {{lendId}}<br />
-             Object : {{object}}<br />
-             Who : {{who}}<br />
-             When : {{when}}
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-danger" id="deleteLendButton-{{lendId}}">Delete</button>
+    <div ng-controller="lendCtrl">
+      <div ng-repeat='lends in lendList'>
+        <div ng-repeat='lend in lends'>
+          <div id="deleteLendModal-{{lend.lendId}}" class="modal hide fade">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h3>Delete a lend</h3>
+            </div>
+            <div class="modal-body">
+              <p>
+                 Are you sure to delete this lend ?<br /><br />
+                 ID : {{lend.lendId}}<br />
+                 Object : {{lend.object}}<br />
+                 Who : {{lend.who}}<br />
+                 When : {{lend.when}}
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-danger" id="deleteLendButton-{{lend.lendId}}">Delete</button>
+            </div>
+          </div>
         </div>
       </div>
-    {{/lendList}}
-    </script>
+    </div>
     <!-- /Modal Delete -->
     
     <!-- Le javascript
@@ -210,7 +210,9 @@
     <script src="lib/bootstrap/js/jquery.min.js"></script>
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="lib/bootstrap/datepicker/js/bootstrap-datepicker.js"></script>
-    <script src="lib/mustache.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+	<script src="js/controllers.js"></script>
+    
     <script>
     $(document).ready(function(){
         
@@ -230,11 +232,11 @@
             $('#editLendSuccess').fadeIn();
             $('#editLendModal').modal('hide');
         });
-        $.getJSON(server + "/services/lends/list?callback=?", function (json) {
-        	// Fill templates
-            $('#LendListTable').replaceWith(Mustache.to_html($('#LendListTable').html(), json));
-            $('#deleteLendModalList').replaceWith(Mustache.to_html($('#deleteLendModalList').html(), json));
-            $('#editLendModalList').replaceWith(Mustache.to_html($('#editLendModalList').html(), json));
+//         $.getJSON(server + "/services/lends/list?callback=?", function (json) {
+//         	// Fill templates
+//             $('#LendListTable').replaceWith(Mustache.to_html($('#LendListTable').html(), json));
+//             $('#deleteLendModalList').replaceWith(Mustache.to_html($('#deleteLendModalList').html(), json));
+//             $('#editLendModalList').replaceWith(Mustache.to_html($('#editLendModalList').html(), json));
             
             // DatePicker
             $('.datepicker').datepicker();
@@ -262,7 +264,7 @@
 	            // Delete action...
 	            $('#deleteLendSuccess').fadeIn();
 	        });
-        });
+//         });
         
     });
     
