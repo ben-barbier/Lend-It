@@ -2,25 +2,32 @@
 
 /* Controllers */
 
-
-function monCtrl($scope) {
-    $scope.monModele = '';
-    $scope.maMethode = function() {
-        console.log($scope.monModele);
-    };
-};
+/*-------------------*/
+// var server = 'http://localhost:8080';
+   var server = 'http://lend-it-back.herokuapp.com';
+/*-------------------*/
 
 function lendCtrl($scope, $http) {
-	$http.jsonp('http://lend-it-back.herokuapp.com/services/lends/list?callback=JSON_CALLBACK').success(function(data) {
+	$http.jsonp(server + '/services/lends/list?callback=JSON_CALLBACK').success(function(data) {
 		$scope.lendList = data;
 	});
-	$scope.editLend = function($lendId) {
+	$scope.showEditLendModal = function($lendId) {
 		$('#editLendModal-' + $lendId).modal();
 	};
-	$scope.deleteLend = function($lendId) {
+	$scope.showDeleteLendModal = function($lendId) {
 		$('#deleteLendModal-' + $lendId).modal();
 	};
 	$scope.addLend = function() {
 		$('#addLendSuccess').fadeIn();
+	};
+	$scope.editLend = function($lendId) {
+        $('#editLendModal-' + $lendId).modal('hide');
+        // Delete action...
+        $('#editLendSuccess').fadeIn();
+	};
+	$scope.deleteLend = function($lendId) {
+        $('#deleteLendModal-' + $lendId).modal('hide');
+        // Delete action...
+        $('#deleteLendSuccess').fadeIn();
 	};
 };

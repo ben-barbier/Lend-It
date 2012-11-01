@@ -113,8 +113,8 @@
                   <td>{{lend.object}}</td>
                   <td>{{lend.who}}</td>
                   <td>{{lend.when}}</td>
-                  <td><i class="icon-pencil" id="editLendIcon-{{lend.lendId}}" ng-click="editLend(lend.lendId)"></i></td>
-                  <td><i class="icon-trash" id="deleteLendIcon-{{lend.lendId}}" ng-click="deleteLend(lend.lendId)"></i></td>
+                  <td><i class="icon-pencil" id="editLendIcon-{{lend.lendId}}" ng-click="showEditLendModal(lend.lendId)"></i></td>
+                  <td><i class="icon-trash" id="deleteLendIcon-{{lend.lendId}}" ng-click="showDeleteLendModal(lend.lendId)"></i></td>
                 </tr>
             </tbody>
           </table>
@@ -167,8 +167,8 @@
               </form>
             </div>
             <div class="modal-footer">
-              <button id="cancelEditLendButton" type="button" class="btn" data-dismiss="modal">Close</button>
-              <button type="submit" id="editLendButton-{{lend.lendId}}" class="btn btn-primary">Save</button>
+              <button type="button" class="btn" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" id="editLendButton-{{lend.lendId}}" ng-click="editLend(lend.lendId)">Save</button>
             </div>
           </div>
         </div>
@@ -196,7 +196,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-danger" id="deleteLendButton-{{lend.lendId}}">Delete</button>
+              <button type="submit" class="btn btn-danger" id="deleteLendButton-{{lend.lendId}}" ng-click="deleteLend(lend.lendId)">Delete</button>
             </div>
           </div>
         </div>
@@ -213,39 +213,12 @@
     <script src="lib/angular/angular.min.js"></script>
 	<script src="js/controllers.js"></script>
     
-    <script>
+    <script  type="text/javascript">
     $(document).ready(function(){
-        
-        /*-------------------*/
-        // var server = 'http://localhost:8080';
-        var server = 'http://lend-it-back.herokuapp.com';
-        /*-------------------*/
-        
         $('#header').load('header.inc.html');
         $('#footer').load('footer.inc.html');
-        
-            
-        // DatePicker
         $('.datepicker').datepicker();
-        
-        // Edit actions
-        $('[id^=editLendButton-]').click(function(){
-          var lendId = this.id.substr(this.id.length-1);
-          $('#editLendModal-'+lendId).modal('hide');
-          // Delete action...
-          $('#editLendSuccess').fadeIn();
-        });
-        
-        // Delete actions
-        $('[id^=deleteLendButton-]').click(function(){
-          var lendId = this.id.substr(this.id.length-1);
-          $('#deleteLendModal-'+lendId).modal('hide');
-          // Delete action...
-          $('#deleteLendSuccess').fadeIn();
-        });
-        
     });
-    
     </script>
   </body>
 </html>
