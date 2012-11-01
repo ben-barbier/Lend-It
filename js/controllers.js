@@ -15,11 +15,12 @@ function lendCtrl($scope, $http) {
 		$scope.lendList = data;
 	});
 	$scope.editLend = function($lendId) {
-		alert('edit: ' + $lendId);
 		$('#editLendModal-' + $lendId).modal();
 	};
 	$scope.deleteLend = function($lendId) {
-		alert('delete: ' + $lendId);
 		$('#deleteLendModal-' + $lendId).modal();
+	};
+	$scope.addLend = function() {
+		$('#addLendSuccess').fadeIn();
 	};
 };

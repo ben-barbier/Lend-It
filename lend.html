@@ -51,7 +51,7 @@
       <div class="row">
         <div class="span4"> 
           <div class="well">
-            <form class="form-horizontal" action="#">
+            <form class="form-horizontal" action="#" ng-controller="lendCtrl">
               <legend>Record a lend</legend>
               <div class="control-group">
                 <label class="control-label" for="inputWhat">What :</label>
@@ -75,7 +75,7 @@
                   </div>
                 </div>
                  <br />
-                <button type="submit" id="addLendButton" class="btn btn-primary">Add lend</button>
+                <button type="submit" id="addLendButton" ng-click="addLend()" class="btn btn-primary">Add lend</button>
             </form>
           </div>
         </div>
@@ -224,14 +224,6 @@
         $('#header').load('header.inc.html');
         $('#footer').load('footer.inc.html');
         
-        
-        $('#addLendButton').click(function(){
-            $('#addLendSuccess').fadeIn();
-        });
-        $('#editLendButton').click(function(){
-            $('#editLendSuccess').fadeIn();
-            $('#editLendModal').modal('hide');
-        });
             
         // DatePicker
         $('.datepicker').datepicker();
