@@ -113,8 +113,8 @@
                   <td>{{lend.object}}</td>
                   <td>{{lend.who}}</td>
                   <td>{{lend.when}}</td>
-                  <td><i class="icon-pencil" id="editLendIcon-{{lendId}}"></i></td>
-                  <td><i class="icon-trash" id="deleteLendIcon-{{lendId}}"></i></td>
+                  <td><i class="icon-pencil" id="editLendIcon-{{lend.lendId}}" ng-click="editLend(lend.lendId)"></i></td>
+                  <td><i class="icon-trash" id="deleteLendIcon-{{lend.lendId}}" ng-click="deleteLend(lend.lendId)"></i></td>
                 </tr>
             </tbody>
           </table>
@@ -232,39 +232,25 @@
             $('#editLendSuccess').fadeIn();
             $('#editLendModal').modal('hide');
         });
-//         $.getJSON(server + "/services/lends/list?callback=?", function (json) {
-//         	// Fill templates
-//             $('#LendListTable').replaceWith(Mustache.to_html($('#LendListTable').html(), json));
-//             $('#deleteLendModalList').replaceWith(Mustache.to_html($('#deleteLendModalList').html(), json));
-//             $('#editLendModalList').replaceWith(Mustache.to_html($('#editLendModalList').html(), json));
             
-            // DatePicker
-            $('.datepicker').datepicker();
-            
-            // Edit actions
-            $('[id^=editLendIcon-]').click(function(){
-                var lendId = this.id.substr(this.id.length-1);
-                $('#editLendModal-'+lendId).modal();
-              });
-            $('[id^=editLendButton-]').click(function(){
-	            var lendId = this.id.substr(this.id.length-1);
-	            $('#editLendModal-'+lendId).modal('hide');
-	            // Delete action...
-	            $('#editLendSuccess').fadeIn();
-	        });
-            
-            // Delete actions
-            $('[id^=deleteLendIcon-]').click(function(){
-              var lendId = this.id.substr(this.id.length-1);
-              $('#deleteLendModal-'+lendId).modal();
-            });
-	        $('[id^=deleteLendButton-]').click(function(){
-	            var lendId = this.id.substr(this.id.length-1);
-	            $('#deleteLendModal-'+lendId).modal('hide');
-	            // Delete action...
-	            $('#deleteLendSuccess').fadeIn();
-	        });
-//         });
+        // DatePicker
+        $('.datepicker').datepicker();
+        
+        // Edit actions
+        $('[id^=editLendButton-]').click(function(){
+          var lendId = this.id.substr(this.id.length-1);
+          $('#editLendModal-'+lendId).modal('hide');
+          // Delete action...
+          $('#editLendSuccess').fadeIn();
+        });
+        
+        // Delete actions
+        $('[id^=deleteLendButton-]').click(function(){
+          var lendId = this.id.substr(this.id.length-1);
+          $('#deleteLendModal-'+lendId).modal('hide');
+          // Delete action...
+          $('#deleteLendSuccess').fadeIn();
+        });
         
     });
     
