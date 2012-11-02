@@ -42,7 +42,7 @@
 
   <body>
     
-    <div id="header"></div>
+    <ng-include src="'header.inc.html'"></ng-include>
     
     <div class="container">
       
@@ -121,7 +121,7 @@
         </div>
       </div>
       
-      <div id="footer"></div>
+      <ng-include src="'footer.inc.html'"></ng-include>
       
     </div> <!-- /container -->
     
@@ -209,23 +209,16 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="lib/bootstrap/js/jquery.min.js"></script>
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="lib/bootstrap/js/LendIt-update.js"></script>
     <script src="lib/bootstrap/datepicker/js/bootstrap-datepicker.js"></script>
     <script src="lib/angular/angular.min.js"></script>
-    <script src="lib/angular/angular-resource.js"></script>
+    <script src="lib/angular/angular-resource.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/services.js"></script>
 	<script src="js/controllers.js"></script>
     
     <script  type="text/javascript">
     $(document).ready(function(){
-      
-      //Hide the alert message
-      $('.alert .close').live('click',function(){
-        $(this).parent().fadeOut();
-      });
-      
-      $('#header').load('header.inc.html');
-      $('#footer').load('footer.inc.html');
       $('.datepicker').datepicker();
     });
     </script>
