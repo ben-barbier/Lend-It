@@ -7,13 +7,9 @@
    var server = 'http://lend-it-back.herokuapp.com';
 /*-------------------*/
 
-function lendCtrl($scope, $resource) {
+function lendCtrl($scope, Lend) {
 	
-	$scope.lend = $resource(server + '/services/lends/list',
-		{action:'test', callback:"JSON_CALLBACK"},
-		{get:{method:'JSONP'}});
-	
-	$scope.lendList = $scope.lend.get();
+	$scope.lendList = Lend.query();
 	
 	$scope.newWhat = '';
 	$scope.newWho  = '';
@@ -38,4 +34,5 @@ function lendCtrl($scope, $resource) {
         // Delete action...
         $('#deleteLendSuccess').fadeIn();
 	};
+	
 };
