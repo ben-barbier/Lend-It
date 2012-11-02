@@ -7,10 +7,18 @@
    var server = 'http://lend-it-back.herokuapp.com';
 /*-------------------*/
 
-function lendCtrl($scope, $http) {
-	$http.jsonp(server + '/services/lends/list?callback=JSON_CALLBACK').success(function(data) {
-		$scope.lendList = data;
-	});
+function lendCtrl($scope, $resource) {
+	
+	$scope.lend = $resource(server + '/services/lends/list',
+		{action:'test', callback:"JSON_CALLBACK"},
+		{get:{method:'JSONP'}});
+	
+	$scope.lendList = $scope.lend.get();
+	
+	$scope.newWhat = '';
+	$scope.newWho  = '';
+	$scope.newWhen = '';
+	
 	$scope.showEditLendModal = function($lendId) {
 		$('#editLendModal-' + $lendId).modal();
 	};
