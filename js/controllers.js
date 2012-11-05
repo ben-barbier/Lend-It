@@ -9,7 +9,7 @@
 
 function lendCtrl($scope, Lend) {
 	
-	$scope.lendList = Lend.query();
+	$scope.lendList = Lend.list();
 	
 	$scope.newWhat = '';
 	$scope.newWho  = '';
@@ -25,14 +25,15 @@ function lendCtrl($scope, Lend) {
 		$('#addLendSuccess').fadeIn();
 	};
 	$scope.editLend = function($lendId) {
+		// Edit action...
         $('#editLendModal-' + $lendId).modal('hide');
-        // Delete action...
         $('#editLendSuccess').fadeIn();
 	};
 	$scope.deleteLend = function($lendId) {
+		Lend.remove({action:$lendId});
         $('#deleteLendModal-' + $lendId).modal('hide');
-        // Delete action...
         $('#deleteLendSuccess').fadeIn();
+        $scope.lendList = Lend.list();
 	};
 	
 };
