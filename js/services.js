@@ -8,7 +8,7 @@ angular.module('LendIt', ['ngResource'], function($routeProvider) {
 	$routeProvider.when('/Lend', {templateUrl: 'lend.html', controller: lendCtrl});
 	$routeProvider.when('/Loan', {templateUrl: 'loan.html'});
 	$routeProvider.when('/About', {templateUrl: 'about.html'});
-	$routeProvider.otherwise({redirectTo: '/home.html'});
+	$routeProvider.otherwise({redirectTo: '/Home'});
 	
 }).factory('Lend', function($resource){
 	return $resource(server + ':P/services/lends/:method/:action',{P: port, callback:"JSON_CALLBACK"},{
