@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="LendIt">
   <head>
     <meta charset="utf-8">
     <title>Lend-It</title>
@@ -17,8 +17,15 @@
       .sidebar-nav {
         padding: 9px 0;
       }
+     .form-horizontal .control-label {
+        width: 70px;
+      }
+      .form-horizontal .controls {
+        margin-left: 80px;
+      }
     </style>
     <link href="lib/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="lib/bootstrap/datepicker/css/datepicker.css" rel="stylesheet"> 
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -34,21 +41,40 @@
   </head>
 
   <body>
-  
-	<div id="header"></div>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span> 
+            <span class="icon-bar"></span> 
+            <span class="icon-bar"></span>
+          </a> 
+          <a class="brand" href="#Home">Lend-it</a>
+          <div class="nav-collapse collapse">
+            <p class="navbar-text pull-right">
+              Logged in as <a href="#" class="navbar-link">Username</a>
+            </p>
+            <ul class="nav">
+              <li id="lendLink"><a href="#Lend">Lend</a></li>
+              <li id="loanLink"><a href="#Loan">Loan</a></li>
+              <li id="aboutLink"><a href="#About">About</a></li>
+            </ul>
+          </div>
+          <!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
 
     <div class="container">
 
-      <h1>Lend-It!</h1>
-      <p>
-        loan = emprunter<br />
-        lend = préter
-      </p>
-      <p><a class="btn btn-primary btn-large">Lend &raquo;</a></p>
-      <p><a class="btn btn-primary btn-large">Loan &raquo;</a></p>
-      
-      <div id="footer"></div>
-      
+      <div ng-view></div>
+
+      <hr />
+      <footer>
+        <p>&copy; Lend-It 2012 (by <a href="https://github.com/Agent-22" target="_blank">Benjamin Barbier</a>)</p>
+      </footer>
+
     </div> <!-- /container -->
 
     <!-- Le javascript
@@ -56,13 +82,12 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="lib/bootstrap/js/jquery.min.js"></script>
     <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-    <script>
-    $(document).ready(function(){
-		$('#header').load('header.inc.html');
-		$('#footer').load('footer.inc.html');
-    });
-    </script>
-
-
+    <script src="lib/bootstrap/js/LendIt-update.js"></script>
+    <script src="lib/bootstrap/datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular/angular-resource.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
   </body>
 </html>
