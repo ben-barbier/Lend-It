@@ -9,7 +9,9 @@
 
 function lendCtrl($scope, Lend) {
 	
-	$('.datepicker').datepicker();
+	$scope.initDatePicker = function () {
+		$('.datepicker').datepicker();
+	}
 	
 	$scope.lendList = Lend.list();
 	
