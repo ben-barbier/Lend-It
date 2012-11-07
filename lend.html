@@ -1,5 +1,7 @@
 <h1>Lend !</h1>
 
+<div ng-controller="lendCtrl" ng-init="initCtrl();">
+
 <div class="row">
   <div class="span4"> 
     <div class="well">
@@ -40,15 +42,15 @@
     </div>
     <div id="editLendSuccess" class="alert alert-success hide">
       <button type="button" class="close">×</button>
-      Lend successfully updated.
+      Lend {{selectedLendId}} successfully updated.
     </div>
     <div id="deleteLendSuccess" class="alert alert-success hide">
       <button type="button" class="close">×</button>
-      Lend successfully deleted.
+      Lend {{selectedLendId}} successfully deleted.
     </div>
     <!-- /Alerts -->
     
-    <table ng-controller="lendCtrl" ng-init="initList();initDatePicker();" class="table table-hover table-condensed">
+    <table class="table table-hover table-condensed">
       <thead>
         <tr>
           <th>#</th>
@@ -65,8 +67,8 @@
             <td>{{lend.object}}</td>
             <td>{{lend.who}}</td>
             <td>{{lend.when}}</td>
-            <td><i class="icon-pencil" id="editLendIcon-{{lend.lendId}}" ng-click="showEditLendModal(lend.lendId)"></i></td>
-            <td><i class="icon-trash" id="deleteLendIcon-{{lend.lendId}}" ng-click="showDeleteLendModal(lend.lendId)"></i></td>
+            <td><i class="icon-pencil" ng-click="showEditLendModal(lend.lendId,lend.object,lend.who,lend.when);"></i></td>
+            <td><i class="icon-trash" ng-click="showDeleteLendModal(lend.lendId,lend.object,lend.who,lend.when);"></i></td>
           </tr>
       </tbody>
     </table>
@@ -74,10 +76,7 @@
 </div>
 
 <!-- Modal Edit -->
-<div ng-controller="lendCtrl" ng-init="initList();">
-  <div ng-repeat='lends in lendList'>
-    <div ng-repeat='lend in lends'>
-      <div id="editLendModal-{{lend.lendId}}" class="modal hide fade">
+      <div id="editLendModal" class="modal hide fade">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h3>Edit a lend</h3>
@@ -87,25 +86,25 @@
             <div class="control-group">
               <label class="control-label" for="inputLendID">ID :</label>
               <div class="controls">
-                <input type="text" id="inputWhat" value="{{lend.lendId}}" disabled />
+                <input type="text" id="inputWhat" value="{{selectedLendId}}" disabled />
               </div>
             </div>
             <div class="control-group">
               <label class="control-label" for="inputWhat">What :</label>
               <div class="controls">
-                <input type="text" id="inputWhat" placeholder="What have you lent ?" value="{{lend.object}}" />
+                <input type="text" id="inputWhat" placeholder="What have you lent ?" value="{{selectedWhat}}" />
               </div>
             </div>
             <div class="control-group">
               <label class="control-label" for="inputWho">Who :</label>
               <div class="controls">
-                <input type="text" id="inputWho" placeholder="To whom you have lent ?" value="{{lend.who}}" />
+                <input type="text" id="inputWho" placeholder="To whom you have lent ?" value="{{selectedWho}}" />
               </div>
             </div>
             <div class="control-group">
               <label class="control-label" for="inputWhen">When :</label>
               <div class="controls">
-                <div data-date-viewmode="years" data-date-format="dd/mm/yyyy" data-date="{{lend.when}}" id="inputWhen" class="datepicker input-append date">
+                <div data-date-viewmode="years" data-date-format="dd/mm/yyyy" data-date="{{selectedWhen}}" id="inputWhen" class="datepicker input-append date">
                   <input type="text" readonly="" value="{{lend.when}}" size="16" class="span2" />
                   <span class="add-on"><i class="icon-calendar"></i></span>
                 </div>
@@ -119,16 +118,10 @@
           <button type="submit" class="btn btn-primary" id="editLendButton-{{lend.lendId}}" ng-click="editLend(lend.lendId)">Save</button>
         </div>
       </div>
-    </div>
-  </div>
-</div>
 <!-- /Modal Edit -->
 
 <!-- Modal Delete -->
-<div ng-controller="lendCtrl" ng-init="initList();">
-  <div ng-repeat='lends in lendList'>
-    <div ng-repeat='lend in lends'>
-      <div id="deleteLendModal-{{lend.lendId}}" class="modal hide fade">
+      <div id="deleteLendModal" class="modal hide fade">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h3>Delete a lend</h3>
@@ -136,18 +129,16 @@
         <div class="modal-body">
           <p>
              Are you sure to delete this lend ?<br /><br />
-             ID : {{lend.lendId}}<br />
-             Object : {{lend.object}}<br />
-             Who : {{lend.who}}<br />
-             When : {{lend.when}}
+             ID : {{selectedLendId}}<br />
+             Object : {{selectedWhat}}<br />
+             Who : {{selectedWho}}<br />
+             When : {{selectedWhen}}
           </p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-danger" id="deleteLendButton-{{lend.lendId}}" ng-click="deleteLend(lend.lendId)">Delete</button>
+          <button type="submit" class="btn btn-danger" ng-click="deleteLend(selectedLendId)">Delete</button>
         </div>
       </div>
-    </div>
-  </div>
-</div>
 <!-- /Modal Delete -->
+</div>
