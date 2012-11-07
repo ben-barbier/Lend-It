@@ -9,6 +9,8 @@
 
 function lendCtrl($scope, Lend) {
 	
+	$('.datepicker').datepicker();
+	
 	$scope.lendList = Lend.list();
 	
 	$scope.newWhat = '';
@@ -33,7 +35,8 @@ function lendCtrl($scope, Lend) {
 		Lend.remove({action:$lendId});
         $('#deleteLendModal-' + $lendId).modal('hide');
         $('#deleteLendSuccess').fadeIn();
-        $scope.lendList = Lend.list();
+//        $scope.lendList = Lend.list();
+//        $scope.lendList.$apply;
 	};
 	
 };
