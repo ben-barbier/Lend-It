@@ -7,14 +7,17 @@
    var server = "http://lend-it-back.herokuapp.com"; var port = "";
 /*-------------------*/
 
-function lendCtrl($scope, Lend) {
+function lendCtrl($scope, $rootScope, Lend) {
+	
+	$scope.initList = function () {
+		$scope.lendList = Lend.list();
+	};
 	
 	$scope.initDatePicker = function () {
 		$('.datepicker').datepicker();
-	}
+	};
 	
-	$scope.lendList = Lend.list();
-	
+	$scope.lendList = [];
 	$scope.newWhat = '';
 	$scope.newWho  = '';
 	$scope.newWhen = '';
@@ -37,8 +40,11 @@ function lendCtrl($scope, Lend) {
 		Lend.remove({action:$lendId});
         $('#deleteLendModal-' + $lendId).modal('hide');
         $('#deleteLendSuccess').fadeIn();
-//        $scope.lendList = Lend.list();
-//        $scope.lendList.$apply;
+        $rootScope.$broadcast('Delete-Lend'); //send an event
 	};
+	
+	$scope.$on('Delete-Lend', function(event, data) {
+		$scope.lendList = Lend.list();
+	});
 	
 };

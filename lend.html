@@ -48,7 +48,7 @@
     </div>
     <!-- /Alerts -->
     
-    <table ng-controller="lendCtrl" ng-init="initDatePicker();" class="table table-hover table-condensed">
+    <table ng-controller="lendCtrl" ng-init="initList();initDatePicker();" class="table table-hover table-condensed">
       <thead>
         <tr>
           <th>#</th>
@@ -74,7 +74,7 @@
 </div>
 
 <!-- Modal Edit -->
-<div ng-controller="lendCtrl">
+<div ng-controller="lendCtrl" ng-init="initList();">
   <div ng-repeat='lends in lendList'>
     <div ng-repeat='lend in lends'>
       <div id="editLendModal-{{lend.lendId}}" class="modal hide fade">
@@ -125,7 +125,7 @@
 <!-- /Modal Edit -->
 
 <!-- Modal Delete -->
-<div ng-controller="lendCtrl">
+<div ng-controller="lendCtrl" ng-init="initList();">
   <div ng-repeat='lends in lendList'>
     <div ng-repeat='lend in lends'>
       <div id="deleteLendModal-{{lend.lendId}}" class="modal hide fade">
