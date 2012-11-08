@@ -10,13 +10,16 @@ angular.module('LendIt', ['ngResource'], function($routeProvider) {
 	$routeProvider.when('/About', {templateUrl: 'about.html'});
 	$routeProvider.otherwise({redirectTo: '/Home'});
 	
+	// configure html5 to get links working on jsfiddle
+	//$locationProvider.html5Mode(true);
+	
 }).factory('Lend', function($resource){
-	return $resource(server + ':P/services/lends/:method/:action',{P: port, callback:"JSON_CALLBACK"},{
-		get:{method:'JSONP'}, // params:{action:'2'}
-		list:{method:'JSONP'}, // List all -> No params
-		update:{method:'JSONP', params:{method:'update'}},
-		insert:{method:'JSONP', params:{method:'insert'}},
-		remove:{method:'JSONP', params:{method:'delete'}}
+	return $resource(server + ':P/services/lends/:action',{P: port, callback:"JSON_CALLBACK"},{
+		get:{method:'GET'}, // params:{action:'2'}
+		query:{method:'GET'}, // List all -> no params
+		save:{method:'POST'},
+		add:{method:'PUT'},
+		remove:{method:'DELETE'}
 	});
 });
 

@@ -10,7 +10,9 @@
 function lendCtrl($scope, Lend) {
 	
 	$scope.initCtrl = function () {
-		$scope.lendList = Lend.list();
+		//TODO: see why INIT is launch 2 times
+//		alert('init');
+		$scope.lendList = Lend.query();
 		$('.datepicker').datepicker();
 	};
 	
@@ -39,6 +41,13 @@ function lendCtrl($scope, Lend) {
 	};
 	$scope.addLend = function() {
 		$('#addLendSuccess').fadeIn();
+		
+//		Lend.object = "OBJECT INSERT";
+//		Lend.who = "WHO INSERT";
+//		Lend.when = "12/12/2012";
+		Lend.add();
+//		Lend.save();
+		
 	};
 	$scope.editLend = function($lendId) {
 		// Edit action...
@@ -49,7 +58,7 @@ function lendCtrl($scope, Lend) {
 		Lend.remove({action:$lendId});
         $('#deleteLendModal').modal('hide');
         $('#deleteLendSuccess').fadeIn();
-        $scope.lendList = Lend.list();
+        $scope.lendList = Lend.query();
 	};
 	
 };
