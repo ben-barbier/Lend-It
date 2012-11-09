@@ -14,7 +14,7 @@ angular.module('LendIt', ['ngResource'], function($routeProvider) {
 	//$locationProvider.html5Mode(true);
 	
 }).factory('Lend', function($resource){
-	return $resource(server + ':P/services/lends/:action',{P: port, callback:"JSON_CALLBACK"},{
+	return $resource(server + ':P/services/lends/:action',{P: port},{
 		get:{method:'GET'}, // params:{action:'2'}
 		query:{method:'GET'}, // List all -> no params
 		save:{method:'POST'},
