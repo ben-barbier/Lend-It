@@ -25,14 +25,14 @@ function lendCtrl($scope, Lend) {
 	$scope.selectedWhat = '';
 	$scope.selectedWhen = '';
 	
-	$scope.showEditLendModal = function($lendId, $who, $what, $when) {
+	$scope.showEditLendModal = function($lendId, $what, $who, $when) {
 		$scope.selectedLendId = $lendId;
 		$scope.selectedWho  = $who;
 		$scope.selectedWhat = $what;
 		$scope.selectedWhen = $when;
 		$('#editLendModal').modal();
 	};
-	$scope.showDeleteLendModal = function($lendId, $who, $what, $when) {
+	$scope.showDeleteLendModal = function($lendId, $what, $who, $when) {
 		$scope.selectedLendId = $lendId;
 		$scope.selectedWho  = $who;
 		$scope.selectedWhat = $what;
