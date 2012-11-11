@@ -40,22 +40,16 @@ function lendCtrl($scope, Lend) {
 		$('#deleteLendModal').modal();
 	};
 	$scope.addLend = function() {
+		Lend.add({object:$scope.newWhat,who:$scope.newWho,when:$scope.newWhen});
 		$('#addLendSuccess').fadeIn();
-		
-//		Lend.object = "OBJECT INSERT";
-//		Lend.who = "WHO INSERT";
-//		Lend.when = "12/12/2012";
-		Lend.add();
-//		Lend.save();
-		
 	};
-	$scope.editLend = function($lendId) {
-		// Edit action...
-        $('#editLendModal').modal('hide');
+	$scope.editLend = function() {
+		$('#editLendModal').modal('hide');
+		Lend.save({lendId:$scope.selectedLendId,object:$scope.selectedWhat,who:$scope.selectedWho,when:$scope.selectedWhen});
         $('#editLendSuccess').fadeIn();
 	};
 	$scope.deleteLend = function($lendId) {
-		Lend.remove({action:$lendId});
+		Lend.remove({lendId:$lendId});
         $('#deleteLendModal').modal('hide');
         $('#deleteLendSuccess').fadeIn();
         $scope.lendList = Lend.query();

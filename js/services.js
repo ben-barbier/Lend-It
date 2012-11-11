@@ -14,12 +14,12 @@ angular.module('LendIt', ['ngResource'], function($routeProvider) {
 	//$locationProvider.html5Mode(true);
 	
 }).factory('Lend', function($resource){
-	return $resource(server + ':P/services/lends/:action',{P: port},{
-		get:{method:'GET'}, // params:{action:'2'}
+	return $resource(server + ':P/services/lends/:lendId',{P: port},{
+		get:{method:'GET'}, // params:{lendId:'2'}
 		query:{method:'GET'}, // List all -> no params
 		save:{method:'POST'},
 		add:{method:'PUT'},
-		remove:{method:'DELETE'}
+		remove:{method:'DELETE'} // params:{lendId:'2'}
 	});
 });
 

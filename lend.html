@@ -86,19 +86,19 @@
             <div class="control-group">
               <label class="control-label" for="inputLendID">ID :</label>
               <div class="controls">
-                <input type="text" id="inputWhat" value="{{selectedLendId}}" disabled />
+                <input type="text" id="inputWhat" ng-model="selectedLendId" disabled />
               </div>
             </div>
             <div class="control-group">
               <label class="control-label" for="inputWhat">What :</label>
               <div class="controls">
-                <input type="text" id="inputWhat" placeholder="What have you lent ?" value="{{selectedWhat}}" />
+                <input type="text" id="inputWhat" placeholder="What have you lent ?" ng-model="selectedWhat" />
               </div>
             </div>
             <div class="control-group">
               <label class="control-label" for="inputWho">Who :</label>
               <div class="controls">
-                <input type="text" id="inputWho" placeholder="To whom you have lent ?" value="{{selectedWho}}" />
+                <input type="text" id="inputWho" placeholder="To whom you have lent ?" ng-model="selectedWho" />
               </div>
             </div>
             <div class="control-group">
@@ -115,7 +115,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" ng-click="editLend(lend.lendId)">Save</button>
+          <button type="submit" class="btn btn-primary" ng-click="editLend();">Save</button>
         </div>
       </div>
 <!-- /Modal Edit -->
