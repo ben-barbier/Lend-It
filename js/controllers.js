@@ -42,11 +42,13 @@ function lendCtrl($scope, Lend) {
 	$scope.addLend = function() {
 		Lend.add({object:$scope.newWhat,who:$scope.newWho,when:$scope.newWhen});
 		$('#addLendSuccess').fadeIn();
+		$scope.lendList = Lend.query();
 	};
 	$scope.editLend = function() {
 		$('#editLendModal').modal('hide');
 		Lend.save({lendId:$scope.selectedLendId,object:$scope.selectedWhat,who:$scope.selectedWho,when:$scope.selectedWhen});
         $('#editLendSuccess').fadeIn();
+        $scope.lendList = Lend.query();
 	};
 	$scope.deleteLend = function($lendId) {
 		Lend.remove({lendId:$lendId});
