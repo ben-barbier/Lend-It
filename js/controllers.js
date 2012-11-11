@@ -2,18 +2,18 @@
 
 /* Controllers */
 
-/*-------------------*/
-// var server = "http://127.0.0.1"; var port = ":8080";
-   var server = "http://lend-it-back.herokuapp.com"; var port = "";
-/*-------------------*/
-
 function lendCtrl($scope, Lend) {
 	
 	$scope.initCtrl = function () {
 		//TODO: see why INIT is launch 2 times
 //		alert('init');
 		$scope.lendList = Lend.query();
-		$('.datepicker').datepicker();
+		$('#inputWhenAdd').datepicker().on('changeDate', function(ev){
+			$scope.newWhen = ev.date.valueOf();
+		});
+		$('#inputWhenEdit').datepicker().on('changeDate', function(ev){
+			$scope.selectedWhen = ev.date.valueOf();
+		});
 	};
 	
 	$scope.lendList = [];
@@ -51,8 +51,8 @@ function lendCtrl($scope, Lend) {
         $scope.lendList = Lend.query();
 	};
 	$scope.deleteLend = function($lendId) {
+		$('#deleteLendModal').modal('hide');
 		Lend.remove({lendId:$lendId});
-        $('#deleteLendModal').modal('hide');
         $('#deleteLendSuccess').fadeIn();
         $scope.lendList = Lend.query();
 	};
