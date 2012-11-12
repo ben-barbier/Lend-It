@@ -40,21 +40,24 @@ function lendCtrl($scope, Lend) {
 		$('#deleteLendModal').modal();
 	};
 	$scope.addLend = function() {
-		Lend.add({object:$scope.newWhat,who:$scope.newWho,when:$scope.newWhen});
-		$('#addLendSuccess').fadeIn();
-		$scope.lendList = Lend.query();
+		Lend.add({object:$scope.newWhat,who:$scope.newWho,when:$scope.newWhen}, function(res) {
+			$('#addLendSuccess').fadeIn();
+			$scope.lendList = Lend.query();
+		});
 	};
 	$scope.editLend = function() {
-		$('#editLendModal').modal('hide');
-		Lend.save({lendId:$scope.selectedLendId,object:$scope.selectedWhat,who:$scope.selectedWho,when:$scope.selectedWhen});
-        $('#editLendSuccess').fadeIn();
-        $scope.lendList = Lend.query();
+		Lend.save({lendId:$scope.selectedLendId,object:$scope.selectedWhat,who:$scope.selectedWho,when:$scope.selectedWhen}, function(res) {
+			$('#editLendModal').modal('hide');
+			$('#editLendSuccess').fadeIn();
+			$scope.lendList = Lend.query();
+		});
 	};
 	$scope.deleteLend = function($lendId) {
-		$('#deleteLendModal').modal('hide');
-		Lend.remove({lendId:$lendId});
-        $('#deleteLendSuccess').fadeIn();
-        $scope.lendList = Lend.query();
+		Lend.remove({lendId:$lendId}, function(res) {
+			$('#deleteLendModal').modal('hide');
+			$('#deleteLendSuccess').fadeIn();
+			$scope.lendList = Lend.query();
+		});
 	};
 	
 };
