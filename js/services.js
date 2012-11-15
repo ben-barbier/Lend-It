@@ -5,7 +5,7 @@
 angular.module('LendIt', ['ngResource'], function($routeProvider) {
 	
 	$routeProvider.when('/Home', {templateUrl: 'home.html'});
-	$routeProvider.when('/Lend', {templateUrl: 'lend.html', controller: lendCtrl});
+	$routeProvider.when('/Lend', {templateUrl: 'lend.html', controller: lendCtrl, reloadOnSearch:false});
 	$routeProvider.when('/Loan', {templateUrl: 'loan.html'});
 	$routeProvider.when('/About', {templateUrl: 'about.html'});
 	$routeProvider.otherwise({redirectTo: '/Home'});
