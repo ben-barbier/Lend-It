@@ -5,8 +5,6 @@
 function lendCtrl($scope, Lend) {
 	
 	$scope.initCtrl = function () {
-		//TODO: see why INIT is launch 2 times
-//		alert('init');
 		$scope.lendList = Lend.query();
 		$('#inputWhenAdd').datepicker().on('changeDate', function(ev){
 			$scope.newWhen = ev.date.valueOf();
