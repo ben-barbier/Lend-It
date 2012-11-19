@@ -41,6 +41,9 @@ function lendCtrl($scope, Lend) {
 		Lend.add({object:$scope.newWhat,who:$scope.newWho,when:$scope.newWhen}, function(res) {
 			$('#addLendSuccess').fadeIn();
 			$scope.lendList = Lend.query();
+			$scope.newWhat = '';
+			$scope.newWho  = '';
+			$scope.newWhen = '';
 		});
 	};
 	$scope.editLend = function() {
