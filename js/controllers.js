@@ -3,6 +3,8 @@
 /* Controllers */
 
 function lendCtrl($scope, Lend) {
+
+	var infoDisplayTime = 5000; 
 	
 	$scope.initCtrl = function () {
 		$scope.lendList = Lend.query();
@@ -39,7 +41,7 @@ function lendCtrl($scope, Lend) {
 	};
 	$scope.addLend = function() {
 		Lend.add({object:$scope.newWhat,who:$scope.newWho,when:$scope.newWhen}, function(res) {
-			$('#addLendSuccess').fadeIn();
+			$('#addLendSuccess').fadeIn().delay(infoDisplayTime).fadeOut();
 			$scope.lendList = Lend.query();
 			$scope.newWhat = '';
 			$scope.newWho  = '';
@@ -49,14 +51,14 @@ function lendCtrl($scope, Lend) {
 	$scope.editLend = function() {
 		Lend.save({lendId:$scope.selectedLendId,object:$scope.selectedWhat,who:$scope.selectedWho,when:$scope.selectedWhen}, function(res) {
 			$('#editLendModal').modal('hide');
-			$('#editLendSuccess').fadeIn();
+			$('#editLendSuccess').fadeIn().delay(infoDisplayTime).fadeOut();;
 			$scope.lendList = Lend.query();
 		});
 	};
 	$scope.deleteLend = function($lendId) {
 		Lend.remove({lendId:$lendId}, function(res) {
 			$('#deleteLendModal').modal('hide');
-			$('#deleteLendSuccess').fadeIn();
+			$('#deleteLendSuccess').fadeIn().delay(infoDisplayTime).fadeOut();;
 			$scope.lendList = Lend.query();
 		});
 	};
