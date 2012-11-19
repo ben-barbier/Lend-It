@@ -22,5 +22,3 @@ angular.module('LendIt', ['ngResource'], function($routeProvider) {
 		remove:{method:'DELETE'} // params:{lendId:'2'}
 	});
 });
-
-// JSONP -> HTTP GET method...
