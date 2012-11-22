@@ -2,7 +2,7 @@
 
 /* Services */
 
-angular.module('LendIt', ['ngResource'], function($routeProvider) {
+angular.module('LendIt', ['ngResource', 'ui'], function($routeProvider) {
 	
 	$routeProvider.when('/Home', {templateUrl: 'home.html'});
 	$routeProvider.when('/Lend', {templateUrl: 'lend.html', controller: lendCtrl, reloadOnSearch:false});
