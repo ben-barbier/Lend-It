@@ -16,7 +16,7 @@ function lendCtrl($scope, Lend) {
 		});
 	};
 	
-	$scope.lendList = [];
+	$scope.lendList = new Array();
 	$scope.newWhat = '';
 	$scope.newWho  = '';
 	$scope.newWhen = '';
